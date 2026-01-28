@@ -1,11 +1,16 @@
-const express=require('express');
-const app=express();
-const mongoose=require('mongoose');
-const MONGO_URL = "mongodb://127.0.0.1:27017/Twitter";
+const express = require('express');
+const morgan = require('morgan');
+const { serverConfig, loggerConfig } = require('./config'); // Pulls from config/index.js
+const connectDB = require('./config/db-config');
 
-app.listen(4000,()=>{
-    console.log("Server started");
-    mongoose.connect(MONGO_URL)
-  .then(() => console.log("✅ MongoDB connected to Twitter DB"))
-  .catch(err => console.error("❌ MongoDB connection error:", err));
-})
+const app = express();
+
+// Middleware
+app.use(morgan('dev'));
+app.use(express.json()); // Essential for a Twitter clone so you can read JSON tweets!
+
+app.listen(serverConfig.PORT, async () => {
+   loggerConfig.info(`🚀 Server is live on port ${serverConfig.PORT}`);
+    await connectDB();
+    
+});
