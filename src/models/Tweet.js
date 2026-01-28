@@ -19,7 +19,7 @@ const tweetSchema = new Schema({
     comments: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Comment' 
+           
         }
     ]
 }, { timestamps: true }); // Automatically adds createdAt and updatedAt
