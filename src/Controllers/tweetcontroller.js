@@ -9,9 +9,9 @@ const createTweet = asyncWrapper(async (req, res) => {
 });
 
 const getTweet=asyncWrapper(async (req,res)=>{
-      const result=await TweetService.getTweet(req.body.id);
+      const result=await TweetService.getTweet(req.params.id);
       SuccessResponse.data=result;
-     return res.status(201).json(SuccessResponse);
+     return res.status(200).json(SuccessResponse);
 })
 module.exports={
     createTweet,

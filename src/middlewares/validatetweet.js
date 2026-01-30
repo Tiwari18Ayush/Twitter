@@ -12,7 +12,7 @@ function validateTweet(req, res, next) {
   next();
 };
 function validategetTweet(req, res, next) {
-  const { id } = req.body;
+  const { id } = req.params;
 
   if (!id) {
     return next(
