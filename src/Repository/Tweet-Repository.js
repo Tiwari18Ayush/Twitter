@@ -1,20 +1,18 @@
-const model=require('../models/Tweet');
-class TweetRepository{
-      constructor(model){
-        this.model=model;
-      }
-      async create(data){
-        const result=await this.model.create(data);
-        return result;
-      }
-      async get(id) {
-        const result = await this.model.findById(id);
-        return result;
+const Tweet = require('../models/Tweet');
+
+class TweetRepository {
+
+    async create(data) {
+        return await Tweet.create(data);
+    }
+
+    async get(id) {
+        return await Tweet.findById(id);
     }
 
     async destroy(id) {
-        const result = await this.model.findByIdAndDelete(id);
-        return result;
-    } 
+        return await Tweet.findByIdAndDelete(id);
+    }
 }
-module.exports=TweetRepository;
+
+module.exports = TweetRepository;
