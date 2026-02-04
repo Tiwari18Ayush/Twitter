@@ -13,6 +13,12 @@ class TweetRepository {
     async destroy(id) {
         return await Tweet.findByIdAndDelete(id);
     }
+    async incrementLikes(tweetId, value) {
+    return Tweet.updateOne(
+      { _id: tweetId },
+      { $inc: { likes: value } }
+    );
+  }
 }
 
 module.exports = TweetRepository;

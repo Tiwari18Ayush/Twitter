@@ -11,6 +11,7 @@ const tweetSchema = new Schema({
         type: Number,
         default: 0 // Starts at 0
     },
+
     noOfRetweets: {
         type: Number,
         default: 0

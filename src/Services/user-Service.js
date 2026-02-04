@@ -5,7 +5,7 @@ const { StatusCodes } = require('http-status-codes');
 const bcrypt = require('bcrypt');
 const JWT=require('../utils/common/JWT');
 async function createUser(data){
-    const result=userRepo.create(data);
+    const result=await userRepo.create(data);
     return result;
 }
 async function userLogin(data){

@@ -1,5 +1,6 @@
 const AppError = require('../utils/Errors/AppError');
 const { StatusCodes } = require('http-status-codes');
+const jwt=require('../utils/common/JWT');
 function validateSignUP(req,res,next){
     const {email,password,username}=req.body;
     if(!email || !password || !username){
@@ -14,20 +15,29 @@ function validateSignIN(req,res,next){
     }
     next();
 }
-function authenticate(req,res,next){
-   const header = req.headers.authorization;
+function authenticate(req, res, next) {
+    const header = req.headers.authorization;
 
-   if(!header){
-      return next(new AppError("Token missing",StatusCodes.UNAUTHORIZED));
-   }
+    if (!header) {
+        // This will be caught by your global error handler
+        return next(new AppError("Token missing", StatusCodes.UNAUTHORIZED));
+    }
 
-   const token = header.split(' ')[1];
+    // Split 'Bearer <token>'
+    const token = header.split(' ')[1];
 
-   const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    if (!token) {
+        return next(new AppError("Malformed Token", StatusCodes.UNAUTHORIZED));
+    }
 
-   req.user = decoded;
+    // If jwt.verify fails, it throws an error. 
+    // If this function is wrapped in your asyncWrapper, it goes straight to global handler.
+    const decoded = jwt.verifyToken(token);
 
-   next();
+    // If we reach here, the token is valid.
+    req.user = decoded; 
+
+    next();
 }
 module.exports={
     validateSignUP,

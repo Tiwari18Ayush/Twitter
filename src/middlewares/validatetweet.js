@@ -12,9 +12,9 @@ function validateTweet(req, res, next) {
   next();
 };
 function validategetTweet(req, res, next) {
-  const { id } = req.params;
+  const { tweetId } = req.params;
 
-  if (!id) {
+  if (!tweetId) {
     return next(
       new AppError('Tweet id is required', StatusCodes.BAD_REQUEST)
     );

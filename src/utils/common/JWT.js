@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-require('dotenv').config(); // Loads variables from .env into process.env
+//  require('dotenv').config(); // Loads variables from .env into process.env
 
 const generateToken = (payload) => {
   // Use the environment variable, or a fallback (only for dev!)
@@ -11,5 +11,11 @@ const generateToken = (payload) => {
 
   return jwt.sign(payload, secretKey, options);
 };
+const verifyToken=(token)=>{
+   const secretKey = process.env.JWT_SECRET; 
+  return jwt.verify(token,secretKey)
+}
 
-module.exports = { generateToken };
+module.exports = { generateToken,
+  verifyToken
+ };

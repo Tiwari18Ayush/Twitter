@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const morgan = require('morgan');
 const { serverConfig, loggerConfig } = require('./config'); // Pulls from config/index.js

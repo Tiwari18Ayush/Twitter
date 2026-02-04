@@ -9,7 +9,7 @@ const createTweet = asyncWrapper(async (req, res) => {
 });
 
 const getTweet=asyncWrapper(async (req,res)=>{
-      const result=await TweetService.getTweet(req.params.id);
+      const result=await TweetService.getTweet(req.params.tweetId);
       SuccessResponse.data=result;
      return res.status(200).json(SuccessResponse);
 })

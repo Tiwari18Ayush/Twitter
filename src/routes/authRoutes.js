@@ -8,4 +8,4 @@ router.post('/SignUP',authmiddleware.validateSignUP,authcontroller.createUser);
 router.post('/SignIN', authmiddleware.validateSignIN, authcontroller.userLogin);
 
 
-module.exports = AuthRoutes = router;
+module.exports = router;
