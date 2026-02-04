@@ -38,5 +38,17 @@ router.post(
 //   '/:tweetId/likes/count',
 //   likecontroller.getTweetLikeCount
 // );
+/* ---------------- COMMENTS ROUTES ---------------- */
+
+router.post(
+  '/:tweetId/comment',
+ authmiddleware.authenticate,
+  commentController.createTweetComment
+);
+
+router.get(
+  '/:tweetId/comments',
+  commentController.getTweetComments
+);
 
 module.exports = router;
