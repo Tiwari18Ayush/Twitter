@@ -5,7 +5,7 @@ const validateTweet = require('../middlewares/validatetweet');
 const TweetController = require('../Controllers/tweetcontroller');
 const authmiddleware = require('../middlewares/authmiddleware');
 const likecontroller = require('../Controllers/likecontroller');
-
+const commentController=require('../Controllers/commentcontroller')
 /* ---------------- TWEETS ---------------- */
 
 // create tweet
@@ -49,6 +49,11 @@ router.post(
 router.get(
   '/:tweetId/comments',
   commentController.getTweetComments
+);
+router.delete(
+  '/:tweetId/comment',
+ authmiddleware.authenticate,
+  commentController.deleteComment
 );
 
 module.exports = router;

@@ -83,8 +83,8 @@ const getReplies = asyncWrapper(async (req, res) => {
 // ======================================================
 const deleteComment = asyncWrapper(async (req, res) => {
   const commentId = req.params.commentId;
-
-  await commentService.deleteComment(commentId);
+  const userId = req.user.id;
+  await commentService.deleteComment(commentId,userId);
 
   SuccessResponse.message = 'Comment deleted successfully';
 

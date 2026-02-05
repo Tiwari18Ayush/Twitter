@@ -72,6 +72,14 @@ class CommentRepository {
   async get(commentId) {
     return Comment.findById(commentId).populate('user', 'username');
   }
+   // =========================
+  // get userid from comment
+  // =========================
+
+  async getuserfromComment(commentId){
+    const user=Comment.findById(commentId).select(user);
+    return user;
+  }
 }
 
 module.exports = CommentRepository;
