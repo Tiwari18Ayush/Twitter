@@ -10,9 +10,10 @@ class UserRepository {
 }
 
 
-    async getById(id) {
-        return await User.findById(id).populate('tweets');
-    }
+   async getById(id) {
+  return await User.findById(id);
+}
+
 }
 
 module.exports = UserRepository;
