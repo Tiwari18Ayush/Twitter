@@ -76,10 +76,11 @@ class CommentRepository {
   // get userid from comment
   // =========================
 
-  async getuserfromComment(commentId){
-    const user=Comment.findById(commentId).select(user);
-    return user;
-  }
+ async getuserfromComment(commentId){
+  const comment = await Comment.findById(commentId).select('user');
+  return comment.user;
+}
+
 }
 
 module.exports = CommentRepository;
