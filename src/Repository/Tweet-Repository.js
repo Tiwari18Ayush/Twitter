@@ -16,7 +16,7 @@ class TweetRepository {
     async incrementLikes(tweetId, value) {
     return Tweet.updateOne(
       { _id: tweetId },
-      { $inc: { likes: value } }
+      { $inc: { likesCount: value } }
     );
   }
 }
