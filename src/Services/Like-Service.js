@@ -2,6 +2,8 @@ const LikeRepository = require('../Repository/Like-Repository');
 const TweetRepository = require('../Repository/Tweet-Repository');
 const AppError = require('../utils/Errors/AppError');
 const { StatusCodes } = require('http-status-codes');
+const CommentRepository = require('../Repository/comment-Repository');
+const commentRepository = new CommentRepository();
 
 const likeRepository = new LikeRepository();
 const tweetRepository = new TweetRepository();
@@ -29,6 +31,10 @@ async function toggleLike(userId, likeableId, onModel) {
 
     return { liked: false };
   }
+  if (onModel === 'Comment') {
+  await commentRepository.incrementLikes(likeableId, -1);
+}
+
 
   // =========================
   // LIKE
