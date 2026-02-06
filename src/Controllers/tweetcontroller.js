@@ -3,7 +3,7 @@ const asyncWrapper=require('../utils/common/wrapper');
 const SuccessResponse=require('../utils/common/SuccessResponse');
 
 const createTweet = asyncWrapper(async (req, res) => {
-     const result = await TweetService.createTweet(req.body);
+     const result = await TweetService.createTweet(req.user._id,req.body);
      SuccessResponse.data = result;
      return res.status(201).json(SuccessResponse);
 });

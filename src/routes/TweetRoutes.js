@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
-
+const passport = require('../Auth/Passport');
 const validateTweet = require('../middlewares/validatetweet');
 const TweetController = require('../Controllers/tweetcontroller');
-const authmiddleware = require('../middlewares/authmiddleware');
 const likecontroller = require('../Controllers/likecontroller');
 const commentController=require('../Controllers/commentcontroller')
 /* ---------------- TWEETS ---------------- */
@@ -11,7 +10,7 @@ const commentController=require('../Controllers/commentcontroller')
 // create tweet
 router.post(
   '/',
-  authmiddleware.authenticate,
+ passport.authenticate('jwt', { session: false }),
   validateTweet.validateTweet,
   TweetController.createTweet
 );
@@ -29,7 +28,7 @@ router.get(
 // toggle like
 router.post(
   '/:tweetId/like',
-  authmiddleware.authenticate,
+   passport.authenticate('jwt', { session: false }),
   likecontroller.toggleTweetLike
 );
 
@@ -42,7 +41,7 @@ router.post(
 
 router.post(
   '/:tweetId/comment',
- authmiddleware.authenticate,
+  passport.authenticate('jwt', { session: false }),
   commentController.createTweetComment
 );
 
@@ -52,7 +51,7 @@ router.get(
 );
 router.delete(
   '/:tweetId/comment',
- authmiddleware.authenticate,
+  passport.authenticate('jwt', { session: false }),
   commentController.deleteComment
 );
 

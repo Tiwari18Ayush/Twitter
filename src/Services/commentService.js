@@ -2,7 +2,6 @@ const CommentRepository = require('../Repository/comment-Repository');
 const tweetRepository=require('../Repository/Tweet-Repository');
 const AppError = require('../utils/Errors/AppError');
 const { StatusCodes } = require('http-status-codes');
-const StatusCodes=require('http-status-codes');
 const commentRepository = new CommentRepository();
 
 
