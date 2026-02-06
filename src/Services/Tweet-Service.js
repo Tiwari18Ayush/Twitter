@@ -4,10 +4,11 @@ const Tweetrepo=new tweetRepository();
 const Hashrepo= new hashtagRepository();
 const AppError = require('../utils/Errors/AppError');
 const { StatusCodes } = require('http-status-codes');
-async function createTweet(data) {
+async function createTweet(userId, data)
+ {
   const hashtags = data.content.match(/#[a-zA-Z0-9_]+/g) || [];
   const hashtagTexts = hashtags.map(tag => tag.substring(1).toLowerCase());
-
+   data.user = userId;
   const tweet = await Tweetrepo.create(data);
 
   if (hashtagTexts.length === 0) return tweet;
