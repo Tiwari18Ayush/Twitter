@@ -12,6 +12,13 @@ const tweetSchema = new Schema({
         default: 0 // Starts at 0
     },
 
+    //Image in a tweet
+    image: {
+    type: String,
+     default: null
+    },
+
+
     noOfRetweets: {
         type: Number,
         default: 0

@@ -1,11 +1,19 @@
 const tweetRepository=require('../Repository/Tweet-Repository');
 const hashtagRepository=require('../Repository/Hashtag-Repository');
+const cloudinary = require("../config/cloudinary");
 const Tweetrepo=new tweetRepository();
 const Hashrepo= new hashtagRepository();
 const AppError = require('../utils/Errors/AppError');
 const { StatusCodes } = require('http-status-codes');
-async function createTweet(userId, data)
+async function createTweet(userId, data,file)
  {
+  if(file){
+    const result = await cloudinary.uploader.upload(
+      `data:${file.mimetype};base64,${file.buffer.toString("base64")}`,
+      { folder: "tweets" }
+    );
+    data.image = result.secure_url;
+  }
   const hashtags = data.content.match(/#[a-zA-Z0-9_]+/g) || [];
   const hashtagTexts = hashtags.map(tag => tag.substring(1).toLowerCase());
    data.user = userId;

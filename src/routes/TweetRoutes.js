@@ -4,13 +4,15 @@ const passport = require('../Auth/Passport');
 const validateTweet = require('../middlewares/validatetweet');
 const TweetController = require('../Controllers/tweetcontroller');
 const likecontroller = require('../Controllers/likecontroller');
-const commentController=require('../Controllers/commentcontroller')
+const commentController=require('../Controllers/commentcontroller');
+const upload=require('../middlewares/multer')
 /* ---------------- TWEETS ---------------- */
 
 // create tweet
 router.post(
   '/',
  passport.authenticate('jwt', { session: false }),
+  upload.single("image"),
   validateTweet.validateTweet,
   TweetController.createTweet
 );
@@ -18,7 +20,7 @@ router.post(
 // get tweet
 router.get(
   '/:tweetId',
-  validateTweet.validategetTweet,
+  validateTweet.validateGetTweet, // ✅ matches the export in your middleware file
   TweetController.getTweet
 );
 
